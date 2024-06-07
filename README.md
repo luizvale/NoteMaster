@@ -1,5 +1,5 @@
 ## Description
-This is a simple web-based note-taking application where users can write a note, save it, view a list of their saved notes, and delete a note. The user's notes are saved so they are available on any web-capable device.
+Simple web-based note-taking application where users can write a note, save it, view a list of their saved notes, and delete a note. The user's notes are saved so they are available on any web-capable device.
 
 ## Features
 - **Write Note:** Users can type a note in a text area.
