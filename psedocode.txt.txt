@@ -1,0 +1,46 @@
+
+### pseudocode.txt
+
+```txt
+# Pseudo Code
+
+## Endpoint: Get Notes
+FUNCTION getNotes(userId):
+    IF AuthService.validateSession(userId) == FALSE:
+        RETURN error "User not logged in", 401
+    
+    userNotes = NoteRepository.findAllByUserId(userId)
+    RETURN userNotes, 200
+END FUNCTION
+
+## Endpoint: Save Note
+FUNCTION saveNote(content, userId):
+    IF AuthService.validateSession(userId) == FALSE:
+        RETURN error "User not logged in", 401
+    
+    IF content IS EMPTY:
+        RETURN error "Content is required", 400
+    
+    note = NEW Note()
+    note.noteId = generateUniqueId()
+    note.userId = userId
+    note.content = content
+    note.createdAt = CURRENT_TIMESTAMP
+    note.updatedAt = CURRENT_TIMESTAMP
+    
+    NoteRepository.save(note)
+    RETURN note, 201
+END FUNCTION
+
+## Endpoint: Delete Note
+FUNCTION deleteNote(noteId, userId):
+    IF AuthService.validateSession(userId) == FALSE:
+        RETURN error "User not logged in", 401
+    
+    note = NoteRepository.findByIdAndUserId(noteId, userId)
+    IF note IS NULL:
+        RETURN error "Note not found", 404
+    
+    NoteRepository.deleteByIdAndUserId(noteId, userId)
+    RETURN success "Note deleted", 204
+END FUNCTION
